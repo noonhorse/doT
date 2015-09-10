@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dot by noonhorse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Dot</h1>
+      <h2 class="project-tagline">Nodejs和浏览器中最快+最简洁的Javascript模板引擎</h2>
+      <a href="https://github.com/noonhorse/doT" class="btn">View on GitHub</a>
+      <a href="https://github.com/noonhorse/doT/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/noonhorse/doT/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p>Created in search of the fastest and concise JavaScript templating function with emphasis on performance under V8 and nodejs. It shows great performance for both nodejs and browsers.</p>
+
+<p>doT.js is fast, small and has no dependencies.</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<pre><code>custom delimiters
+runtime evaluation
+runtime interpolation
+compile-time evaluation
+partials support
+conditionals support
+array iterators
+encoding
+control whitespace - strip or preserve
+streaming friendly
+use it as logic-less or with logic, it is up to you
+</code></pre>
+
+<h2>
+<a id="docs-live-playground-and-samples" class="anchor" href="#docs-live-playground-and-samples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Docs, live playground and samples</h2>
+
+<p><a href="http://olado.github.com/doT">http://olado.github.com/doT</a> (todo: update docs with new features added in version 1.0.0)</p>
+
+<h2>
+<a id="new-in-version-100" class="anchor" href="#new-in-version-100" aria-hidden="true"><span class="octicon octicon-link"></span></a>New in version 1.0.0</h2>
+
+<h4>
+<a id="added-parameters-support-in-partials" class="anchor" href="#added-parameters-support-in-partials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Added parameters support in partials</h4>
+
+<pre><code>{{##def.macro:param:
+    &lt;div&gt;{{=param.foo}}&lt;/div&gt;
+#}}
+
+{{#def.macro:myvariable}}
+</code></pre>
+
+<h4>
+<a id="node-module-now-supports-auto-compilation-of-dot-templates-from-specified-path" class="anchor" href="#node-module-now-supports-auto-compilation-of-dot-templates-from-specified-path" aria-hidden="true"><span class="octicon octicon-link"></span></a>Node module now supports auto-compilation of dot templates from specified path</h4>
+
+<pre><code>var dots = require("dot").process({ path: "./views"});
+</code></pre>
+
+<p>This will compile .def, .dot, .jst files found under the specified path.
+Details</p>
+
+<ul>
+<li>It ignores sub-directories.</li>
+<li>Template files can have multiple extensions at the same time.</li>
+<li>Files with .def extension can be included in other files via {{#def.name}}</li>
+<li>Files with .dot extension are compiled into functions with the same name and
+can be accessed as renderer.filename</li>
+<li>Files with .jst extension are compiled into .js files. Produced .js file can be
+loaded as a commonJS, AMD module, or just installed into a global variable (default is set to window.render)</li>
+<li>
+<p>All inline defines defined in the .jst file are
+compiled into separate functions and are available via _render.filename.definename</p>
+
+<p>Basic usage:</p>
+
+<pre><code>      var dots = require("dot").process({path: "./views"});
+      dots.mytemplate({foo:"hello world"});
+</code></pre>
+
+<p>The above snippet will:</p>
+
+<ul>
+<li>Compile all templates in views folder (.dot, .def, .jst)</li>
+<li>Place .js files compiled from .jst templates into the same folder
+     These files can be used with require, i.e. require("./views/mytemplate")</li>
+<li>Return an object with functions compiled from .dot templates as its properties</li>
+<li>Render mytemplate template</li>
+</ul>
+</li>
+</ul>
+
+<h4>
+<a id="cli-tool-to-compile-dot-templates-into-js-files" class="anchor" href="#cli-tool-to-compile-dot-templates-into-js-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>CLI tool to compile dot templates into js files</h4>
+
+<pre><code>./bin/dot-packer -s examples/views -d out/views
+</code></pre>
+
+<h2>
+<a id="example-for-express" class="anchor" href="#example-for-express" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example for express</h2>
+
+<pre><code>Many people are using doT with express. I added an example of the best way of doing it examples/express:
+</code></pre>
+
+<p><a href="examples/express">doT with express</a></p>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<pre><code>doU.js is here only so that legacy external tests do not break. Use doT.js.
+doT.js with doT.templateSettings.append=false provides the same performance as doU.js.
+</code></pre>
+
+<h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Laura Doktorova <a href="http://twitter.com/olado">@olado</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>doT is licensed under the MIT License. (See LICENSE-DOT)</p>
+
+<p align="center">
+  <img src="http://olado.github.io/doT/doT-js-100@2x.png" alt="logo by Kevin Kirchner">
+</p>
+
+<p>Thank you <a href="https://twitter.com/kevinkirchner">@KevinKirchner</a> for the logo.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/noonhorse/doT">Dot</a> is maintained by <a href="https://github.com/noonhorse">noonhorse</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("first ");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
